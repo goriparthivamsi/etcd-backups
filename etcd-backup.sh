@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Script to backup etcd data from RKE2 cluster and upload to S3
-# Author: Generated for RKE2 etcd backup automation
+# Author: Vamsi Goriparthi
 # Date: $(date)
 
 set -e  # Exit on any error
