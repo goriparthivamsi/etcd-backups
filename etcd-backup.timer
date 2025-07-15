@@ -1,0 +1,19 @@
+[Unit]
+Description=RKE2 etcd backup timer
+Requires=etcd-backup.service
+
+[Timer]
+# Run every 6 hours
+OnCalendar=*-*-* 00,06,12,18:00:00
+
+# Run 5 minutes after boot if the last scheduled run was missed
+OnBootSec=5min
+
+# Ensure the timer is persistent across reboots
+Persistent=true
+
+# Add some randomization to prevent all nodes from backing up at the same time
+RandomizedDelaySec=300
+
+[Install]
+WantedBy=timers.target

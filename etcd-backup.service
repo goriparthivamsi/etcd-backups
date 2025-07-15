@@ -1,0 +1,26 @@
+[Unit]
+Description=RKE2 etcd backup service
+After=rke2-server.service
+Requires=rke2-server.service
+
+[Service]
+Type=oneshot
+User=root
+Group=root
+WorkingDirectory=/var/lib/rancher/rke2/server/db/etcd-backup
+ExecStart=/path/to/your/backup/script/etcd-backup.sh
+Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+StandardOutput=journal
+StandardError=journal
+
+# Restart policy
+Restart=no
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/rancher/rke2/server/db/etcd-backup /tmp
+
+[Install]
+WantedBy=multi-user.target
